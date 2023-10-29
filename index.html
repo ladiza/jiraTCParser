@@ -16,7 +16,10 @@
         cols="50"
         placeholder="Copy whole page of JIRA test case with ctrl + a and ctrl + c and paste it here."></textarea>
       <br />
-      <button id="parseButton">Parse</button>
+      <div class="buttons-container">
+        <button id="parseButton" class="submit-button">Parse</button>
+        <button id="parsePWButton" class="submit-button">Parse PW</button>
+      </div>
     </div>
     <h2>Parsed Test Steps:</h2>
     <code id="parsedSteps"></code>
