@@ -74,10 +74,12 @@ function splitSteps(text) {
 function parseStep(stepText) {
   const lines = stepText.split('\n');
 
-  const actionStart = lines.indexOf('Action');
-  const actionEnd = lines.indexOf('Data');
-  const resultStart = lines.indexOf('Expected Result');
-  const resultEnd = lines.indexOf('Attachments');
+  const actionStart = lines.findIndex((text) => text.startsWith('Action'));
+  const actionEnd = lines.findIndex((text) => text.startsWith('Data'));
+  const resultStart = lines.findIndex((text) =>
+    text.startsWith('Expected Result')
+  );
+  const resultEnd = lines.findIndex((text) => text.startsWith('Attachments'));
 
   return {
     number: parseInt(lines[0]),
