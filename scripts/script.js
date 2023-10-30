@@ -173,20 +173,20 @@ function displayPlaywrightResults(result) {
 
   // append steps and results
   result.parsedResults.forEach((step) => {
-    let stepText = `  test.step('Step ${step.number}: ${step.action}', () => {
+    let stepText = `&nbsp;&nbsp;test.step('Step ${step.number}: ${step.action}', () => {
       
     }`;
-    let expectedResultText = `  test.step('Expected result ${step.number}: ${step.result}', () => {
+    let expectedResultText = `&nbsp;&nbsp;test.step('Expected result ${step.number}: ${step.result}', () => {
       
     }`;
 
     let stepParagraph = document.createElement('p');
-    stepParagraph.textContent = stepText;
+    stepParagraph.innerHTML = stepText;
     parsedStepsDiv.appendChild(stepParagraph);
 
     if (step.result) {
       let expectedResultParagraph = document.createElement('p');
-      expectedResultParagraph.textContent = expectedResultText;
+      expectedResultParagraph.innerHTML = expectedResultText;
       parsedStepsDiv.appendChild(expectedResultParagraph);
     }
   });
