@@ -31,7 +31,7 @@ function trimText(text) {
     });
   }
 
-  if (keywordIndexes.length > 2) {
+  if (keywordIndexes.length >= 2) {
     const shortenedText = text.substring(
       keywordIndexes[0].endIndex,
       keywordIndexes[1].startIndex
