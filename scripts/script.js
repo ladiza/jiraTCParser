@@ -173,10 +173,10 @@ function displayPlaywrightResults(result) {
 
   // append steps and results
   result.parsedResults.forEach((step) => {
-    let stepText = `&nbsp;&nbsp;test.step('Step ${step.number}: ${step.action}', () => {
+    let stepText = `  test.step('Step ${step.number}: ${step.action}', () => {
       
     }`;
-    let expectedResultText = `&nbsp;&nbsp;test.step('Expected result ${step.number}: ${step.result}', () => {
+    let expectedResultText = `  test.step('Expected result ${step.number}: ${step.result}', () => {
       
     }`;
 
