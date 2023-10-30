@@ -8,14 +8,16 @@
     <title>Jira Test Case Parser</title>
   </head>
   <body>
-    <h1>Jira Test Case Parser</h1>
-    <textarea
-      id="jiraText"
-      rows="10"
-      cols="50"
-      placeholder="Paste your Jira test case here..."></textarea>
-    <br />
-    <button id="parseButton">Parse</button>
+    <div class="parse-form">
+      <h1>Jira Test Case Parser</h1>
+      <textarea
+        id="jiraText"
+        rows="10"
+        cols="50"
+        placeholder="Copy whole page of JIRA test case with ctrl + a and ctrl + c and paste it here."></textarea>
+      <br />
+      <button id="parseButton">Parse</button>
+    </div>
     <h2>Parsed Test Steps:</h2>
     <code id="parsedSteps"></code>
   </body>
