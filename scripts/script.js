@@ -43,12 +43,16 @@ function trimText(text) {
     });
   }
 
-  if (keywordIndexes.length != 0) {
+  if (keywordIndexes.length >= 2) {
     const shortenedText = text.substring(
       keywordIndexes[0].endIndex,
       keywordIndexes[1].startIndex
     );
     updatedText = shortenedText;
+  } else {
+    alert(
+      `Pravdepodobne nebyl spravne vybran text stranky, nebo test obsahuje prilis mnoho stepu, v takovem pripade oddalte stranku aby byly videt vsechny stepy a zkuste obsah testu zkopirovat znovu`
+    );
   }
 
   updatedText = updatedText.replace(/^\s*[\r\n]/gm, '');
@@ -82,10 +86,12 @@ function splitSteps(text) {
 function parseStep(stepText) {
   const lines = stepText.split('\n');
 
-  const actionStart = lines.indexOf('Action');
-  const actionEnd = lines.indexOf('Data');
-  const resultStart = lines.indexOf('Expected Result');
-  const resultEnd = lines.indexOf('Attachments');
+  const actionStart = lines.findIndex((text) => text.startsWith('Action'));
+  const actionEnd = lines.findIndex((text) => text.startsWith('Data'));
+  const resultStart = lines.findIndex((text) =>
+    text.startsWith('Expected Result')
+  );
+  const resultEnd = lines.findIndex((text) => text.startsWith('Attachments'));
 
   return {
     number: parseInt(lines[0]),
