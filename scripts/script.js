@@ -13,7 +13,7 @@ document.getElementById('parsePWButton').addEventListener('click', () => {
 function getParsedText(jiraText) {
   return {
     parsedResults: parseTextToStepObjects(jiraText),
-    uestURL: getTestURL(jiraText),
+    testURL: getTestURL(jiraText),
     userName: getUserName(jiraText),
   };
 }
@@ -162,15 +162,15 @@ function displayPlaywrightResults(result) {
 
   // append playwright test start
   let testStart = document.createElement('p');
-  testStart.innerHTML = `test('${result.testURL.split('/')[-1]}', () => {`;
-  parsedStepsDiv.appendChild(idParagraph);
+  testStart.textContent = `test('${result.testURL.split('/')[-1]}', () => {`;
+  parsedStepsDiv.appendChild(testStart);
 
   // append steps and results
   result.parsedResults.forEach((step) => {
-    let stepText = `test.step('Step ${step.number}: ${step.action}', () => {
+    let stepText = `&nbsp;&nbsp;test.step('Step ${step.number}: ${step.action}', () => {
       
     }`;
-    let expectedResultText = `test.step('Expected result ${step.number}: ${step.result}', () => {
+    let expectedResultText = `&nbsp;&nbsp;test.step('Expected result ${step.number}: ${step.result}', () => {
       
     }`;
 
@@ -187,6 +187,6 @@ function displayPlaywrightResults(result) {
 
   // append playwright test end
   let testEnd = document.createElement('p');
-  testStart.innerHTML = `});`;
-  parsedStepsDiv.appendChild(idParagraph);
+  testEnd.textContent = `});`;
+  parsedStepsDiv.appendChild(testEnd);
 }
