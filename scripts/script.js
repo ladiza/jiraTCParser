@@ -37,6 +37,10 @@ function trimText(text) {
       keywordIndexes[1].startIndex
     );
     updatedText = shortenedText;
+  } else {
+    alert(
+      `Pravdepodobne nebyl spravne vybran text stranky, nebo test obsahuje prilis mnoho stepu, v takovem pripade oddalte stranku aby byly videt vsechny stepy a zkuste obsah testu zkopirovat znovu`
+    );
   }
 
   updatedText = updatedText.replace(/^\s*[\r\n]/gm, '');
