@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Style for the Copy button */
 .copy-button {
   margin-left: 10px;
@@ -19,33 +23,36 @@ parse-form {
 #jiraText {
   box-sizing: border-box;
   width: 77%;
-  background-color: #d0f4de;
+  background-color: #fff1e6;
   border-radius: 1em;
+  border: 2px solid #cb997e;
 }
 
 #jiraText::placeholder {
   font-size: 1.5em;
+  padding: 0.5em;
 }
 
-#parseButton {
+.submit-button {
   font-size: 1.2rem;
   padding: 0.7em;
   margin: 1em;
   width: 20em;
   border-radius: 0.5em;
-  background-color: #e4c1f9;
+  background-color: #ddbea9;
+  border: 2px solid #e7d8c9;
 }
 
 html {
-  background-color: #a9def9;
+  background-color: white;
 }
 
 #parsedSteps {
-  background-color: #fcf6bd;
+  background-color: #fff1e6;
   width: 77%;
   min-height: 400px;
   display: block;
-  border: 1px solid grey;
+  border: 2px solid #cb997e;
   border-radius: 1em;
   box-sizing: border-box;
   padding: 1rem;

@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/style.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    </style>
     <title>Jira Test Case Parser</title>
   </head>
   <body>
@@ -16,7 +19,10 @@
         cols="50"
         placeholder="Copy whole page of JIRA test case with ctrl + a and ctrl + c and paste it here."></textarea>
       <br />
-      <button id="parseButton">Parse</button>
+      <div class="buttons-container">
+        <button id="parseButton" class="submit-button">Parse</button>
+        <button id="parsePWButton" class="submit-button">Parse PW</button>
+      </div>
     </div>
     <h2>Parsed Test Steps:</h2>
     <code id="parsedSteps"></code>

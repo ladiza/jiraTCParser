@@ -1,10 +1,22 @@
 document.getElementById('parseButton').addEventListener('click', () => {
   let jiraText = document.getElementById('jiraText').value;
-  let parsedResults = parseTextToStepObjects(jiraText);
-  let testURL = getTestURL(jiraText);
-  let userName = getUserName(jiraText);
-  displayParsedResults(parsedResults, testURL, userName);
+  let results = getParsedText(jiraText);
+  displayParsedResults(results);
 });
+
+document.getElementById('parsePWButton').addEventListener('click', () => {
+  let jiraText = document.getElementById('jiraText').value;
+  let results = getParsedText(jiraText);
+  displayPlaywrightResults(results);
+});
+
+function getParsedText(jiraText) {
+  return {
+    parsedResults: parseTextToStepObjects(jiraText),
+    testURL: getTestURL(jiraText),
+    userName: getUserName(jiraText),
+  };
+}
 
 // funkce postupne upravi text tak aby z toho vylezla array objektu, s parametry number, action a result
 function parseTextToStepObjects(inputText) {
@@ -112,20 +124,21 @@ function getUserName(text) {
   return line || 'Error: User not found!';
 }
 
-function displayParsedResults(parsedResults, testURL, userName) {
+function displayParsedResults(result) {
+  console.log(result);
   let parsedStepsDiv = document.getElementById('parsedSteps');
   parsedStepsDiv.innerHTML = ''; // Clear previous results
 
   // append comment with name and link
   let idParagraph = document.createElement('p');
   idParagraph.innerHTML = `/**
-    <br>&nbsp;* @author - ${userName}
-    <br>&nbsp;* @link - ${testURL}
+    <br>&nbsp;* @author - ${result.userName}
+    <br>&nbsp;* @link - ${result.testURL}
     <br>&nbsp;*/`;
   parsedStepsDiv.appendChild(idParagraph);
 
   // append steps and results
-  parsedResults.forEach((step) => {
+  result.parsedResults.forEach((step) => {
     let stepText = `// Step ${step.number}: ${step.action}`;
     let expectedResultText = `// Expected result ${step.number}: ${step.result}`;
 
@@ -139,4 +152,47 @@ function displayParsedResults(parsedResults, testURL, userName) {
       parsedStepsDiv.appendChild(expectedResultParagraph);
     }
   });
+}
+
+function displayPlaywrightResults(result) {
+  let parsedStepsDiv = document.getElementById('parsedSteps');
+  parsedStepsDiv.innerHTML = ''; // Clear previous results
+
+  // append comment with name and link
+  let idParagraph = document.createElement('p');
+  idParagraph.innerHTML = `/**
+    <br>&nbsp;* @author - ${result.userName}
+    <br>&nbsp;* @link - ${result.testURL}
+    <br>&nbsp;*/`;
+  parsedStepsDiv.appendChild(idParagraph);
+
+  // append playwright test start
+  let testStart = document.createElement('p');
+  testStart.textContent = `test('${result.testURL.split('/')[-1]}', () => {`;
+  parsedStepsDiv.appendChild(testStart);
+
+  // append steps and results
+  result.parsedResults.forEach((step) => {
+    let stepText = `&nbsp;&nbsp;test.step('Step ${step.number}: ${step.action}', () => {
+      
+    }`;
+    let expectedResultText = `&nbsp;&nbsp;test.step('Expected result ${step.number}: ${step.result}', () => {
+      
+    }`;
+
+    let stepParagraph = document.createElement('p');
+    stepParagraph.innerHTML = stepText;
+    parsedStepsDiv.appendChild(stepParagraph);
+
+    if (step.result) {
+      let expectedResultParagraph = document.createElement('p');
+      expectedResultParagraph.innerHTML = expectedResultText;
+      parsedStepsDiv.appendChild(expectedResultParagraph);
+    }
+  });
+
+  // append playwright test end
+  let testEnd = document.createElement('p');
+  testEnd.textContent = `});`;
+  parsedStepsDiv.appendChild(testEnd);
 }
